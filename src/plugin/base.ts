@@ -1,4 +1,4 @@
-import { Plugin, PluginManifest, PluginSettings } from '../types/core';
+import { Plugin, PluginManifest, PluginSettings, PluginSettingsConfig } from '../types/core';
 import { AppAPI } from '../api/app';
 import { EditorAPI } from '../api/editor';
 
@@ -41,8 +41,8 @@ export abstract class BasePlugin implements Plugin {
     return cleanup;
   }
 
-  protected addSettingsTab(tab: Parameters<AppAPI['addSettingsTab']>[0]) {
-    const cleanup = this.app.addSettingsTab(tab);
+  protected registerSettings(config: PluginSettingsConfig) {
+    const cleanup = this.app.registerSettings(this.manifest.id, config);
     this.cleanupFunctions.push(cleanup);
     return cleanup;
   }

@@ -5,8 +5,8 @@ import {
   Command, 
   MenuItem, 
   PluginSettings,
+  PluginSettingsConfig,
   StatusBarItem,
-  SettingsTab,
   EditorExtension
 } from '../types/core';
 
@@ -31,9 +31,9 @@ export interface AppAPI {
   // Settings
   loadSettings<T extends PluginSettings>(pluginId: string): Promise<T>;
   saveSettings<T extends PluginSettings>(pluginId: string, settings: T): Promise<void>;
+  registerSettings(pluginId: string, config: PluginSettingsConfig): () => void;
   
   // UI Components
-  addSettingsTab(tab: SettingsTab): () => void;
   addStatusBarItem(item: StatusBarItem): () => void;
   removeStatusBarItem(itemId: string): void;
   

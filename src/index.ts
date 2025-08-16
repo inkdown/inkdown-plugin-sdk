@@ -1,22 +1,14 @@
-// Core Types
+
 export * from './types/core';
 
-// APIs
-export * from './api/app';
-export * from './api/editor';
+export type { AppAPI } from './api/app';
 
-// Base Plugin Class
+export type { EditorAPI, EditorPosition, EditorRange, EditorSelection } from './api/editor';
+
 export { BasePlugin } from './plugin/base';
 
-// UI Components
-export * from './components/Settings';
-
-// Hooks
-export * from './hooks';
-
-// Utilities
 export { definePlugin } from './utils/define-plugin';
-export { createSettingsTab } from './utils/settings-tab';
 
-// Version
+export { createSettings, SettingsBuilder, GroupBuilder } from './utils/settings-builder';
+
 export const SDK_VERSION = '1.0.0';

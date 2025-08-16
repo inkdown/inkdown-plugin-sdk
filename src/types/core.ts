@@ -1,6 +1,5 @@
-import { ReactNode } from 'react';
+import type { EditorAPI } from "../api/editor";
 
-// Plugin Manifest
 export interface PluginManifest {
   id: string;
   name: string;
@@ -102,17 +101,87 @@ export interface MenuItem {
   condition?(): boolean;
 }
 
-// Settings
+// Settings Schema
 export interface PluginSettings {
   [key: string]: any;
 }
 
-// UI Components
-export interface SettingsTab {
+export type SettingType = 
+  | 'text' 
+  | 'number' 
+  | 'boolean' 
+  | 'dropdown' 
+  | 'slider' 
+  | 'textarea' 
+  | 'password' 
+  | 'color' 
+  | 'file' 
+  | 'folder';
+
+export interface BaseSetting {
+  key: string;
+  name: string;
+  description?: string;
+  type: SettingType;
+  defaultValue: any;
+}
+
+export interface TextSetting extends BaseSetting {
+  type: 'text' | 'password';
+  placeholder?: string;
+  maxLength?: number;
+}
+
+export interface NumberSetting extends BaseSetting {
+  type: 'number' | 'slider';
+  min?: number;
+  max?: number;
+  step?: number;
+}
+
+export interface BooleanSetting extends BaseSetting {
+  type: 'boolean';
+}
+
+export interface DropdownSetting extends BaseSetting {
+  type: 'dropdown';
+  options: Array<{ value: string; label: string }>;
+}
+
+export interface TextareaSetting extends BaseSetting {
+  type: 'textarea';
+  placeholder?: string;
+  rows?: number;
+}
+
+export interface ColorSetting extends BaseSetting {
+  type: 'color';
+}
+
+export interface FileSetting extends BaseSetting {
+  type: 'file' | 'folder';
+  extensions?: string[];
+}
+
+export type SettingDefinition = 
+  | TextSetting 
+  | NumberSetting 
+  | BooleanSetting 
+  | DropdownSetting 
+  | TextareaSetting 
+  | ColorSetting 
+  | FileSetting;
+
+export interface SettingGroup {
   id: string;
   name: string;
-  icon?: string;
-  component: ReactNode;
+  description?: string;
+  collapsible?: boolean;
+  settings: SettingDefinition[];
+}
+
+export interface PluginSettingsConfig {
+  groups: SettingGroup[];
 }
 
 export interface StatusBarItem {
