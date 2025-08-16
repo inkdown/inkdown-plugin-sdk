@@ -7,7 +7,8 @@ import {
   PluginSettings,
   PluginSettingsConfig,
   StatusBarItem,
-  EditorExtension
+  EditorExtension,
+  MarkdownOptions
 } from '../types/core';
 
 export interface AppAPI {
@@ -59,4 +60,8 @@ export interface AppAPI {
   openExternal(url: string): Promise<void>;
   copyToClipboard(text: string): Promise<void>;
   readFromClipboard(): Promise<string>;
+  
+  // Markdown Processing
+  markdownToHTML(markdown: string, options?: MarkdownOptions): Promise<string>;
+  htmlToMarkdown(html: string): Promise<string>;
 }

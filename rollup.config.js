@@ -14,7 +14,7 @@ export default {
       sourcemap: true
     }
   ],
-  external: ['react', 'react-dom'],
+  external: [],
   plugins: [
     typescript({
       tsconfig: './tsconfig.json'

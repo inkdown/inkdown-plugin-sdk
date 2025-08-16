@@ -199,3 +199,15 @@ export interface EditorExtension {
   activate(editor: EditorAPI): void;
   deactivate?(): void;
 }
+
+// Markdown Processing
+export interface MarkdownOptions {
+  gfm?: boolean;
+  breaks?: boolean;
+  pedantic?: boolean;
+  sanitize?: boolean;
+  smartLists?: boolean;
+  smartypants?: boolean;
+  headerIds?: boolean;
+  baseUrl?: string;
+}
