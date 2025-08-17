@@ -89,6 +89,17 @@ export interface Command {
   condition?(): boolean;
 }
 
+// Keyboard Shortcuts
+export interface KeyboardShortcut {
+  id: string;
+  name: string;
+  description?: string;
+  shortcut: string;
+  category?: string;
+  execute(): Promise<void> | void;
+  condition?(): boolean;
+}
+
 // Menu Items
 export interface MenuItem {
   id: string;

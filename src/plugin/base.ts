@@ -35,6 +35,12 @@ export abstract class BasePlugin implements Plugin {
     return cleanup;
   }
 
+  protected addKeyboardShortcut(shortcut: Parameters<AppAPI['addKeyboardShortcut']>[0]) {
+    const cleanup = this.app.addKeyboardShortcut(shortcut);
+    this.cleanupFunctions.push(cleanup);
+    return cleanup;
+  }
+
   protected addMenuItem(location: Parameters<AppAPI['addMenuItem']>[0], item: Parameters<AppAPI['addMenuItem']>[1]) {
     const cleanup = this.app.addMenuItem(location, item);
     this.cleanupFunctions.push(cleanup);

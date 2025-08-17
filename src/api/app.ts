@@ -2,7 +2,8 @@ import {
   AppState, 
   AppEvent, 
   EventListener, 
-  Command, 
+  Command,
+  KeyboardShortcut,
   MenuItem, 
   PluginSettings,
   PluginSettingsConfig,
@@ -24,6 +25,10 @@ export interface AppAPI {
   addCommand(command: Command): () => void;
   removeCommand(commandId: string): void;
   executeCommand(commandId: string): Promise<void>;
+  
+  // Keyboard Shortcuts
+  addKeyboardShortcut(shortcut: KeyboardShortcut): () => void;
+  removeKeyboardShortcut(shortcutId: string): void;
   
   // Menu System
   addMenuItem(location: 'context' | 'main' | 'editor', item: MenuItem): () => void;
@@ -60,6 +65,20 @@ export interface AppAPI {
   openExternal(url: string): Promise<void>;
   copyToClipboard(text: string): Promise<void>;
   readFromClipboard(): Promise<string>;
+  
+  // File/Directory Dialogs
+  openFileDialog(options?: {
+    title?: string;
+    filters?: Array<{ name: string; extensions: string[] }>;
+    multiple?: boolean;
+    directory?: boolean;
+  }): Promise<string | string[] | null>;
+  
+  saveFileDialog(options?: {
+    title?: string;
+    defaultPath?: string;
+    filters?: Array<{ name: string; extensions: string[] }>;
+  }): Promise<string | null>;
   
   // Markdown Processing
   markdownToHTML(markdown: string, options?: MarkdownOptions): Promise<string>;
