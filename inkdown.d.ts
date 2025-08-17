@@ -1,4 +1,4 @@
-declare module 'inkdown' {
+declare module 'inkdown-plugin-api' {
   export interface App {
     readFile(path: string): Promise<string>;
     writeFile(path: string, content: string | ArrayBuffer | Uint8Array): Promise<void>;
